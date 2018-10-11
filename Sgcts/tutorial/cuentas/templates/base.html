@@ -1,0 +1,64 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      {% block title %}{% endblock title %}
+      <!-- CSS -->
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+      <link rel="stylesheet" href="{% static 'cuentas/logg/bootstrap/css/bootstrap.min.css' %}">
+      <link rel="stylesheet" href="{% static 'cuentas/logg/font-awesome/css/font-awesome.min.css' %}">
+      <link rel="stylesheet" href="{% static 'cuentas/logg/css/form-elements.css' %}">
+      <link rel="stylesheet" href="{% static 'cuentas/logg/css/style.css' %}">
+      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      <!-- Favicon and touch icons -->
+      <link rel="shortcut icon" href="{% static 'cuentas/logg/ico/logoUnla.PNG' %}">
+      <link rel="shortcut icon" href="cuentas/logg/ico/logoUnla.PNG">
+      <link rel="apple-touch-icon-precomposed" sizes="114x116" href="logoUnla114.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="logoUnla72.png">
+      <link rel="apple-touch-icon-precomposed" href="logoUnla57.png">
+   </head>
+   <body>
+      {% block contenido %} <h1>Prueba reemplazo </h1>{% endblock contenido %}
+      <!-- Javascript -->
+      <script src="{% static 'cuentas/logg/bootstrap/js/bootstrap.min.js' %}"></script>
+      {% load staticfiles %}
+      <script src="{% static 'cuentas/logg/js/jquery-1.11.1.min.js' %}"></script>
+      <script src="{% static 'cuentas/logg/bootstrap/js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'cuentas/logg/js/jquery.backstretch.min.js' %}"></script>
+      <script src="{% static 'cuentas/logg/js/scripts.js' %}"></script>
+      <!--[if lt IE 10]>
+      <script src="logg/js/placeholder.js"></script>
+      <![endif]-->
+      <script>
+         jQuery(document).ready(function() {
+             /*Fullscreen background*/
+             $.backstretch([
+                             "{% static "cuentas/logg/img/backgrounds/Books_HD_(8314929977).jpg" %}"
+         	             ], {duration: 3000, fade: 750});
+             /*Form validation */
+             $('.login-form input[type="text"], .login-form input[type="password"], .login-form textarea').on('focus', function() {
+             	$(this).removeClass('input-error');
+             });
+             $('.login-form').on('submit', function(e) {
+             	$(this).find('input[type="text"], input[type="password"], textarea').each(function(){
+             		if( $(this).val() == "" ) {
+             			e.preventDefault();
+             			$(this).addClass('input-error');
+             		}
+             		else {
+             			$(this).removeClass('input-error');
+             		}
+             	});
+             });
+         });
+      </script>
+   </body>
+</html>

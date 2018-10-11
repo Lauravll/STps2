@@ -1,0 +1,116 @@
+{% extends 'base2.html' %}
+{% load staticfiles %}
+
+{% block titulo %}
+	  <!-- Código -->
+	  <!-- Le paso el valor desde views -->
+      <title>{{nombre1}}</title>
+	  <!-- Fin Código -->
+{% endblock titulo %}
+
+
+{% block scriptini %}
+	  <!-- Código -->
+	  <!-- Función que agrega respuestas en función del valor ingresado por el usuario -->
+	  <script type='text/javascript'>
+        function addFields(c){
+			var count = c;
+			var number = document.getElementById("fieldnum"+count).value;
+			var container = document.getElementById("container"+count);
+			while (container.hasChildNodes()) {
+				container.removeChild(container.lastChild);
+			}
+			for (i=0;i<number;i++){
+				container.appendChild(document.createTextNode("Respuesta " + (i+1) + ": "));
+				var x = document.createElement("input");
+				x.setAttribute("type", "checkbox");
+				container.appendChild(x);
+				var input = document.createElement("input");
+				input.type = "text";
+				input.name = "input" + c + "-" +(i+1);
+				input.className = "form-control";
+				container.appendChild(input);
+			}
+		}
+    </script>
+	  <!-- Fin Código -->
+{% endblock scriptini %}
+
+{% block nomnav %}
+         <ul class="nav navbar-nav d-md-down-none">
+            <li class="nav-item px-3">
+			   <!-- Le paso el nombre del proyecto para colocarlo en el navbar -->
+               <h5 >{{nombreP}}</h5>
+            </li>
+         </ul>
+{% endblock nomnav %}
+
+
+{% block breadcrumb %}
+         <!-- Breadcrumb-->
+         <ol class="breadcrumb">
+         <li class="breadcrumb-item">Inicio</li>
+         <li class="breadcrumb-item">
+         <a href="#">Docente</a>
+         </li>
+         <li class="breadcrumb-item active">Menú</li>
+         </ol>
+{% endblock breadcrumb %}
+
+{% block columna %}
+		 <!-- Código -->
+             <div class="row">
+               <div class="col-12 grid-margin">
+                 <div class="card">
+                   <div class="card-body">
+					 <!-- Le paso el id y el nombre del proyecto -->
+                     <h5 class="card-title" id="card-title">{{idtrabajo}}) {{nombre}}: </h5>
+                     <p class="card-description">Ingrese las preguntas y respuestas:</p>
+                     <!-- Botón que utiliza la primera función, la cual agrega preguntas luego de card-title2-->
+                     <button type="submit" id="btnAddtoList" class="new_answer_btn btn">Agregar pregunta</button>
+                     </p>
+					 <!-- Inicio un formulario cuya acción el cual me redirige al metodo finalizar envíando la información almacenada en los input creados.-->
+                     <form action="finalizar/{{usuario1}}/{{idtrabajo}}" method="post" enctype="multipart/form-data">
+                     <!-- Protege contra falsificaciones, se puede importar con django.middleware.csrf.get_token(request) o utilizar directamente asi -->
+                     {% csrf_token %}
+		             <h4 class="card-title2" id="card-title2"></h4>
+                   </div>
+                   <div class="form-group row">
+                     <label class="col-sm-3 col-form-label"></label>
+                     <div class="col-sm-7"></div>
+                     <div class="col-sm-2">
+					   <div>
+						  <!-- Boton que realiza la accion del form action -->
+						  <button type="submit" href="htrabajo"class="btn btn-primary btn-md">Finalizar Trabajo</button>
+                       </div>
+                     </div>
+                   </div>
+                   {% csrf_token %}
+				   <!-- Finaliza el formulario -->
+				   </form>
+              </div>
+            <!-- /.col-->
+            </div>
+          <!-- /.row-->
+          </div>
+		 <!-- Fin Código -->
+{% endblock columna %}
+
+{% block scriptfin %}
+	  <!-- Código -->
+	  <!-- Funcion que agrega preguntas-->
+      <script>
+         $(function() {
+		 var count = 1;
+         $('#btnAddtoList').click(function(){
+         var newDiv = $('<div class="card"><div class="card-header" style="font-size:66%">Pregunta '+ count + '  </div><input type="hidden" name="cantidad" value= '+ count +'><div class="question panel panel-default' + count + '"><textarea class="form-control" name="consigna'+ count + '" rows="4" data-link="question_text"></textarea><div class="form-control input-lg">Cantidad respuestas: <input type="text" id="fieldnum' + count + '" name="fieldnum' + count + '" size="6" height="35" value=""><a type="button" id="filldetails" class="new_answer_btn btn" onclick="addFields(' + count + ')">Agregar</a></div><div id="container' + count + '" class="form-control input-lg" /></div></div>'
+         );
+
+         $(".card-title2").append(newDiv);
+		 count++;
+         });
+
+         });
+      </script>
+	  <!-- Fin Código -->
+{% endblock scriptfin %}

@@ -1,0 +1,31 @@
+{% extends 'base2.html' %}
+{% load staticfiles %}
+
+{% block titulo %}
+<!-- Le paso el valor desde views -->
+  <title>{{nombreP}}</title>
+{% endblock titulo %}
+
+{% block nomnav %}
+<ul class="nav navbar-nav d-md-down-none">
+   <li class="nav-item px-3">
+      <h5 >{{nombreP}}</h5>
+   </li>
+</ul>
+{% endblock nomnav %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb">
+<li class="breadcrumb-item">Inicio</li>
+<li class="breadcrumb-item">
+<a href="#">{{usuario1.tipo}}</a>
+</li>
+<li class="breadcrumb-item active">Menú</li>
+</ol>
+{% endblock breadcrumb %}
+
+{% block columna %}
+<div class="row">
+<!-- /.col-->
+</div>
+{% endblock columna %}

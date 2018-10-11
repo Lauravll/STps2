@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    <title>Sistema Gestor de Corrección de Trabajos Prácticos</title>
+{% endblock title %}
+
+{% block contenido %}
+<!-- Top content -->
+<div class="top-content">
+   <div class="inner-bg">
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text">
+               <h1><strong>{{nombre1}}</strong> </h1>
+               <div class="description">
+                  <!--
+                     {% for numero in numeros1%}
+                     <li>{{numero}}</li>
+                     {% endfor %} -->
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 form-box">
+               <div class="form-top">
+                  <div class="form-top-left">
+                     <h3>Ingresa al sistema</h3>
+                     <p>Escribe tu usuario y contraseña:</p>
+                  </div>
+               </div>
+               <div class="form-bottom">
+
+			   <form action="/inicio/" method="post" enctype="multipart/form-data">
+			    {% csrf_token %}
+
+                     <div class="form-group">
+                        <label class="sr-only" for="form-username">Usuario</label>
+                        <input type="text" name="usuariol" placeholder="Usuario..." class="form-username form-control">
+                     </div>
+                     <div class="form-group">
+                        <label class="sr-only" for="form-password">Password</label>
+
+                        <input  name="clavel" type="password"  placeholder="Password..." class="form-password form-control" >
+                     </div>
+                    <!-- <button onclick="location.href='cuentas/inicio'"  type="button" class="btn">Iniciar Sección</button> -->
+                    <button type="submit" class="btn">Iniciar Sección</button>
+                  </form>
+				  </form>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 form-box">
+               <div class="form-top">
+                  <div class="form-top-left">
+                     <h3 style="color:#FFFFFF;"><i class="fa fa-lock"></i>   ¿Deseas registrarte?</h3>
+                  </div>
+               </div>
+               <div class="form-bottom">
+                  <form role="form" action="" method="post" class="login-form">
+                     <button type="submit" class="btn">Regístrate</button
+                  </form>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 social-login">
+               <h3 style="color:#FFFFFF;">...o ingresa como alumno:</h3>
+               <div class="social-login-buttons">
+                  <a class="btn btn-link-2" href="#">
+                  <i class=""></i> Ingreso Alumno
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock contenido %}

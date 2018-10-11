@@ -1,0 +1,112 @@
+{% extends 'base2.html' %}
+{% load staticfiles %}
+
+{% block titulo %}
+<!-- Le paso el valor desde views -->
+  <title>{{nombreP}}</title>
+{% endblock titulo %}
+
+{% block nomnav %}
+<ul class="nav navbar-nav d-md-down-none">
+   <li class="nav-item px-3">
+      <h5 >{{nombreP}}</h5>
+   </li>
+</ul>
+{% endblock nomnav %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Inicio</li>
+  <li class="breadcrumb-item">
+    <a href="#">{{usuario1.getTipo}}</a>
+  </li>
+  <li class="breadcrumb-item active">Menú</li>
+</ol>
+{% endblock breadcrumb %}
+
+{% block columna %}
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <!-- paso la funcion en action -->
+      <form action="crear/{{usuario1.getNombre}}" method="post" enctype="multipart/form-data">
+         <!-- Protege contra falsificaciones, se puede importar con django.middleware.csrf.get_token(request) o utilizar directamente asi -->
+				 {% csrf_token %}
+         <div class="card-body">
+           <h5 class="card-title">Nuevo trabajo práctico</h5>
+           <form class="form-sample">
+             <p class="card-description">Ingrese los siguientes datos:</p>
+             <div class="row">
+               <div class="col-md-6">
+                 <div class="form-group row">
+                   <label class="col-sm-3 col-form-label">Título</label>
+                   <div class="col-sm-9">
+                     <input type="text" name="nombret" class="form-control form-control-lg" > </input>
+                   </div>
+                 </div>
+               </div>
+               <div class="col-md-6">
+                 <div class="form-group row">
+                 </div>
+               </div>
+             </div>
+             <div class="row">
+               <div class="col-md-6">
+                 <div class="form-group row">
+                   <label class="col-sm-3 col-form-label">Materia</label>
+                   <div class="col-sm-9">
+                     <select class="form-control form-control-lg" id="materia" name="materia">
+                       <option></option>
+                       <option>Sistemas y Organizaciones</option>
+                       <option>Proyecto de Software</option>
+                     </select>
+                   </div>
+                 </div>
+               </div>
+             </div>
+             <div class="row">
+               <div class="col-md-6">
+                 <div class="form-group row">
+                   <label class="col-sm-3 col-form-label">Carrera</label>
+                   <div class="col-sm-9">
+                     <select class="form-control form-control-lg" id="carrera" name="carrera">
+                       <option></option>
+                       <option>Licenciatura en Sistemas</option>
+                       <option>Licenciatura en Turismo</option>
+                       <option>Traductorado</option>
+                     </select>
+                   </div>
+                 </div>
+               </div>
+             </div>
+             <p></p>
+             <div class="row">
+               <div class="col-md-6">
+                   <div class="form-group row">
+                   </div>
+                 </div>
+                 <div class="col-md-6">
+                   <div class="form-group row">
+                     <label class="col-sm-3 col-form-label"></label>
+                     <div class="col-sm-5">
+                       <div>
+                       </div>
+                     </div>
+                     <div class="col-sm-3">
+                         <div>
+                           <!--<button class="btn btn-youtube pull-right btn-sm mt-3 mb-4 ">Siguiente</button>-->
+                           <button type="submit" href="htrabajo"class="btn btn-primary btn-md">Crear</button>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </form>
+             </div>
+					 {% csrf_token %}
+					</form>
+        </div>
+      </div>
+      <!-- /.col-->
+    </div>
+{% endblock columna %}
