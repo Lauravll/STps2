@@ -6,6 +6,29 @@
   <title>{{nombreP}}</title>
 {% endblock titulo %}
 
+{% block scriptini %}
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="http://yourjavascript.com/7174319415/script.js"></script>
+    <script>
+        $(document).ready(function(){
+             $('select#carrera').change(function () {
+                 var optionSelected = $(this).find("option:selected");
+                 var valueSelected  = optionSelected.val();
+                 var carrera_nombre   = optionSelected.text();
+                 data = {'cnt' : carrera_nombre };
+                 ajax('/enviarCarreras',data,function(result){
+                        console.log(result);
+                        $("#materia option").remove();
+                        for (var i = result.length - 1; i >= 0; i--) {
+                            $("#materia").append('<option>'+ result[i].nombre +'</option>');
+                        };
+                     });
+             });
+        });
+    </script>
+{% endblock scriptini %}
+
+
 {% block nomnav %}
 <ul class="nav navbar-nav d-md-down-none">
    <li class="nav-item px-3">
@@ -53,12 +76,13 @@
              <div class="row">
                <div class="col-md-6">
                  <div class="form-group row">
-                   <label class="col-sm-3 col-form-label">Materia</label>
+                   <label class="col-sm-3 col-form-label">Carrera</label>
                    <div class="col-sm-9">
-                     <select class="form-control form-control-lg" id="materia" name="materia">
-                       <option></option>
-                       <option>Sistemas y Organizaciones</option>
-                       <option>Proyecto de Software</option>
+                     <select name="carrera" id="carrera" class="form-control form-control-lg" >
+                       {% for carrera in carreras %}
+                           <option val="{{ carrera.nombre }}"> {{ carrera}} </option>
+                           <!--  <option val="{{ carrera.nombre }}"> {{ carrera.nombre }} </option> -->
+                       {% endfor %}
                      </select>
                    </div>
                  </div>
@@ -67,13 +91,9 @@
              <div class="row">
                <div class="col-md-6">
                  <div class="form-group row">
-                   <label class="col-sm-3 col-form-label">Carrera</label>
+                   <label class="col-sm-3 col-form-label">Materia</label>
                    <div class="col-sm-9">
-                     <select class="form-control form-control-lg" id="carrera" name="carrera">
-                       <option></option>
-                       <option>Licenciatura en Sistemas</option>
-                       <option>Licenciatura en Turismo</option>
-                       <option>Traductorado</option>
+                     <select name ="materia" id="materia" class="form-control form-control-lg">
                      </select>
                    </div>
                  </div>
